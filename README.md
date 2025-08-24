@@ -2,6 +2,8 @@
 
 # Simple-tasks
 
+![Example](example.gif)
+
 Simple tasks real-time updates with django channels, DRF, celery
 
 This repo is showing example how you can use celery tasks and django channels to send tasks progress over the websockets. The client side is written in react and redux.
@@ -11,8 +13,8 @@ The task that is executed in celery it is simple add. It accepts two arguments i
 In this example the task can be in following states: CREATED, PROGRESS, SUCCESS, FAILURE. The progress value is not stored in database, it is only broadcasted by websockets during task exceution.
 
 The task states and progress are set by:
- - `backend/worker/redis_listener.py` which is pubsub on redis
- - `backend/worker/worker_listener.py` which is monitoring celery events
+ - `backend/worker/redis_listener.py` which is pubsub on redis. It is updating the progress value.
+ - `backend/worker/worker_listener.py` which is monitoring celery events. It is setting state values, for example in case of task failure.
 
 #### Nginx configuration
 
